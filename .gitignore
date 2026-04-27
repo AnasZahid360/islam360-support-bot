@@ -1,0 +1,14 @@
+# Secrets
+.env
+.streamlit/secrets.toml
+
+# Customer data — never commit
+*.xlsx
+rag_documents.jsonl
+
+# Test artifacts
+test_tickets.json
+
+# Python
+__pycache__/
+*.pyc

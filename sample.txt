@@ -1,0 +1,206 @@
+"1. Subscription Issue
+
+User:
+I purchased monthly subscription yesterday but still when I open app to read quran, I get to see ads
+Support:
+Kindly share side menu screenshot
+Support:
+internet on hai
+User:
+Yes
+Support:
+settings mein jaien log out kar k log in karen
+User:
+Logout and then login.....retrieve previous data and now this error coming
+User:
+I have some saved data
+Support:
+ji use previous data pay hi click karna hai
+User:
+jee ap theek work kar raha hai."
+
+
+"2. Font Issues
+
+User:
+Slam, Dear Sir
+i have facing one issue
+User:
+During the Quran some words are not clear on the screen its hide in the screen kindly help me to fix this issue.
+Support:
+WALAIKUM ASALAM
+please screen shot share karen jahan issue araha hai
+User:
+During the reading, some words cut a word in half.
+Support:
+please share karen
+Support:
+sir yeh tu bilkul sahi nazar arahay hian words lekin app fonts adjust akrlen
+User:
+Kindly guide me on how to adjust
+Support:
+Quran open karen kisi bh surah me jaen top right corner par apko settings ka icon show huga uspr click karen, last me apko font size adjustment ka option show hu jaye ga waha se ap set karlen. then apka issue resolve hu jaye ga.
+User:
+g thanyou hu gaya resolve."
+
+
+"3. Inappropriate Ads Issue
+
+User:
+Please remove this ad. It shows things that are hurtful and inappropriate, especially in front of the Quran.
+Support:
+Salam. Our sincerest apologies for the inconvenience. We have a dedicated team working to block inappropriate ads & we are very careful about it. If you still see any ad that is inappropriate, please share here so we can block it at once.
+User:
+Shared Image
+Support:
+Blocked from our side."
+
+
+"4. Content Mistake Issue 
+
+User:
+Assalamualaikum
+User:
+Iss jagah alif pe zabar nahi hai. Iss aayat ko ""huwal hayyul kayyoom"" padengy. Lekin waha zabar ki wajah se use aese padhna pad rha hai ""huwa al hayyul kayyoom"" joke galat hai. Aur aap quran ki
+User:
+Quran arabic mistake
+Support:
+ASALAM WALAIKUM
+yeh hum nay apni content team say chak kar wa lia hai yeh bilkul sahi likha wa hai
+User:
+WaAlaikumAssalam
+Sorry my mistake. Maine achche se check nahi kiya tha. Maine ""waqt"" pe nazar nahi daali thi. Apki app me wo thoda sa upr ki taraf hai aur physical copy me thoda neeche ki taraf likha hota hai.
+Maine dobara check kiya to wo sahi hai.
+Apni galati ke liye mazirat chahuga.
+User:
+Aur mere message pe dyan dene, cross check karne aur reply dene ka bahot bahot shukriya.
+User:
+Isse aapki team ka islam 360 ke nazdeek determination ka pata chalta hai.
+User:
+Allah poori islam 360 ki team ko jazaye kair de. Aap logo ke iss neki kaam bahot badhaye. Ameen :palms_up_together:
+Support:
+JAZAK ALLAH"
+
+
+"5. Web Application Suggestion
+
+User:
+Assalamualaikum Islam360 Staff,
+Firstly i want to say , you guys have built an exceptional software especially the tafseer support by Dr israr is probably my most used feature.
+I wanted to know if you guys provide a desktop or web application, while i have been using this on my mobile for a while, being in the office for 8 - 9 hours a day where i have to take meetings, hear voice messages and all tasks are bound to a laptop or a desktop device, it would be very helpful if there was a islam360 web or desktop application to then take the most benefit out of this application.
+I would help a lot to me personally and for someone who is in a similar situation, do consider this.
+if needed i am a software engineer myself who can aid with both time and
+
+Support:
+WALAIKUM ASALAM
+Dear user JazakAllahu Khairan for your kind words and appreciation. We’re truly glad that you find the app beneficial, especially the Tafseer feature. Currently, Islam360 is primarily available as a mobile application. As a workaround, you can use the app on your computer by installing an Android emulator like BlueStack on your PC. After that, you can download and use the Islam360 app within it."
+
+
+"6. Searching Issue 
+
+User:
+Hope you are doing good
+User:
+I have an issue in search,
+I want to search in Hadith books any Arabic word or sentence,
+It never gives a result even it's in that book,
+Kindly help in this regard,
+Thanks
+Support:
+WALAIKUM ASALAM
+Support:
+please share screen recording from start to end
+Support:
+k kesay app search kar rahay hain
+User:
+Ok in sha'a Allah
+User:
+Kindly check
+User:
+I wrote the actual Arabic words of Hadith,
+User:
+Aarab k Sath b try kia, fr b nhi hota
+User:
+Kabi koi word ya sentence inverted comas k begair b search krta ha mgr 95 percent nhi hota
+Support:
+inverted comas mein likhen jo bhi search ka rahay hian
+User:
+Ok thanks"
+
+
+"7. Shia Books Suggestion
+
+User:
+Assalamualaikum
+User:
+Add shia books as well
+Support:
+WALAIKUM ASALAM
+suggestion noted"
+
+
+"8. Donation Account / IBAN Request
+
+User:
+Assalam o alikum sir
+User:
+Mujy donation deny k lia account # proper IBAN send kren plz
+Overseas donations deny k liay
+جزاك الله خيراً
+
+
+
+Support:
+WALAIKUM ASALAM
+Title: International technology Mission
+A/c# 5000460459
+Bank: Bank Alfalah Ltd
+Branch code: 5592
+IBAN # PK65ALFH5592005000460459
+Branch name: ALLAMA IQBAL ROAD BRANCH KARACHI
+Title: International technology Mission
+A/c# 55925001412406
+Bank: Bank Alfalah Ltd
+Branch code: 5592
+IBAN # PK71ALFH5592005001412406
+Branch name: ALLAMA IQBAL ROAD BRANCH KARACHI.
+
+Support:
+WALAIKUM ASALAM
+ap mujhe receipt share karen hum app ko conformation kardengay
+
+Support:
+Donnation Receipt Send.
+
+User:
+Ok"
+
+
+"9. Namaz Notification Issue
+
+User:
+Salam
+User:
+I'm unable to get Namaz notification
+
+Support:
+WALAIKUM ASALAM
+prayer time mein jaien phr settings mein jaien then screen shot share karen
+
+User:
+Please check
+User:
+Yes
+
+Support:
+app ki location yeh hi hai ?
+Support:
+ok ap k side menu mein jaien the settings aur screen shot complete share karen
+Support:
+app ka side menu bhi share karen
+
+User:
+Now is ok notification and alarm working thank you for your attention and cooperation
+
+Support:
+JAZAK ALLAH

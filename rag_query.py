@@ -86,13 +86,64 @@ ANSWER_PROMPT = ChatPromptTemplate.from_messages([
      "  - 'There is an error in the translation' — ask: which section? Quran translation, Hadith translation, Tafseer, or Duas?\n"
      "  - 'Something is not working' — ask: which feature or section of the app?\n"
      "  - 'I have a problem with the app' — ask: can you describe what you were trying to do?\n"
+     "  - 'I have a subscription issue' — ask: are they (a) seeing ads despite paying, (b) trying to restore on a new device, (c) having a payment/activation issue, or (d) something else?\n"
+     "  - 'I paid but it is not working' — ask: which payment method did they use (App Store, Google Play, EasyPaisa, JazzCash, bank transfer)?\n"
      "Once the section/feature is known, proceed to Stage 1 with the correct issue-type path.\n\n"
 
      "### STAGE 1 — Gather Information (after disambiguation, or directly if issue type is already clear)\n"
      "Do NOT jump to solutions. Ask the most relevant clarifying questions for the identified issue type:\n\n"
-     "- Subscription / ads still showing:\n"
-     "  Ask: (1) are they logged in, (2) which platform (Android/iOS/Huawei).\n"
-     "  Ask them to share a screenshot of the side menu — it will be attached to their support ticket.\n\n"
+     "- Subscription / ads still showing after purchase (most common issue):\n"
+     "  ALWAYS ask for the app side menu screenshot as the very first step.\n"
+     "  Then handle based on what the user shares or tells you:\n\n"
+     "  Sub-case A — User not logged in or using wrong account:\n"
+     "    Tell them to log in with the SAME email/account used when they purchased.\n"
+     "    Then go to app Settings > Restore Purchase.\n\n"
+     "  Sub-case B — Platform mismatch (e.g. bought on Android, now on iPhone):\n"
+     "    Explain that App Store (iOS) and Google Play (Android) subscriptions are separate.\n"
+     "    Ask for receipt and side menu screenshot — team will investigate and assist.\n\n"
+     "  Sub-case C — Subscription shows as active but ads still appear:\n"
+     "    Guide: Settings > Restore Purchase. Then log out and log back in.\n"
+     "    Ask them to share a screenshot of any ad they see.\n\n"
+     "  Sub-case D — Payment via EasyPaisa / JazzCash / Bank transfer:\n"
+     "    These require manual activation by the team — NOT automatic.\n"
+     "    Ask for: (1) payment receipt screenshot with transaction ID, (2) app side menu screenshot.\n"
+     "    Tell them: team will activate the subscription within 24 hours after verifying the receipt.\n\n"
+     "  Sub-case E — Payment deducted but subscription not activated:\n"
+     "    Ask for payment receipt / bank transaction screenshot and side menu screenshot.\n"
+     "    Team verifies and activates manually.\n\n"
+     "- Duplicate / double payment:\n"
+     "  If user paid twice accidentally, both subscriptions are active on their account.\n"
+     "  Explain that refunds are generally not possible as payments were processed on their end.\n"
+     "  Apologize sincerely and acknowledge the inconvenience.\n\n"
+     "- Lifetime subscription:\n"
+     "  Lifetime subscription was discontinued. The current plan is a 3-Year subscription.\n"
+     "  If user claims to have purchased lifetime: ask for side menu screenshot and receipt to verify.\n"
+     "  If user is confused why it shows 3 years: explain lifetime plan was converted/discontinued.\n"
+     "  Be empathetic, especially for long-time users.\n\n"
+     "- Subscription pricing complaint (too expensive / price increased):\n"
+     "  Acknowledge their concern warmly and with empathy.\n"
+     "  Explain that subscription plans and pricing are revised periodically based on platform requirements.\n"
+     "  Lifetime plan was discontinued — the current offering is the 3-Year plan.\n"
+     "  Pricing decisions are set by the platform and cannot be changed individually.\n"
+     "  Close warmly, thank them for their loyalty.\n\n"
+     "- Cancel subscription:\n"
+     "  Guide based on their platform:\n"
+     "  For iOS: Settings > Apple ID > Subscriptions > Islam360 > Cancel Subscription.\n"
+     "  For Android: Play Store > Profile icon > Payments & Subscriptions > Subscriptions > Islam360 > Cancel.\n"
+     "  Advise cancelling at least 24 hours before the next billing date.\n"
+     "  Premium access continues until the end of the paid period.\n\n"
+     "- Family plan / subscription on multiple devices:\n"
+     "  One subscription (account email) works on multiple devices — no separate purchase needed.\n"
+     "  Bookmarks can be created independently on each device (they do NOT sync).\n"
+     "  The 'Last Seen' reading position IS shared/synced across all devices on the same account.\n"
+     "  If completely separate bookmarks AND separate Last Seen are needed, a separate account is required.\n\n"
+     "- Subscription not working on new device (cross-device restore):\n"
+     "  Tell them to log in with the SAME email/Google/Facebook account used for the original purchase.\n"
+     "  After logging in, go to app Settings > Restore Purchase.\n"
+     "  If they don't remember which account: ask for the purchase receipt — email is visible there.\n"
+     "  If login method changed (old email not available, only Google/Facebook shown):\n"
+     "    Ask them to try logging in with Google or Facebook they used originally.\n"
+     "    Share screenshot of the login error for the team to investigate.\n\n"
      "- App bug / feature not working:\n"
      "  Ask: (1) which device and OS version, (2) which part of the app is affected.\n"
      "  Ask for a screenshot or screen recording of the issue — it will be attached to their support ticket.\n\n"
@@ -190,11 +241,58 @@ TICKET_DECISION_PROMPT = ChatPromptTemplate.from_messages([
 ])
 
 
-def build_components():
+def _build_index_from_knowledge() -> FAISS:
+    """Build FAISS index from app_knowledge.jsonl (used when faiss_index/ is missing)."""
+    import json as _json
+    from langchain_core.documents import Document
+
+    KNOWLEDGE_FILE = "app_knowledge.jsonl"
+    print(f"  faiss_index/ not found — building from {KNOWLEDGE_FILE} ...")
+    docs = []
+    with open(KNOWLEDGE_FILE, encoding="utf-8") as f:
+        for line in f:
+            rec = _json.loads(line)
+            docs.append(Document(
+                page_content=rec["conversation"],
+                metadata={
+                    "id": rec["id"],
+                    "subject": rec["subject"],
+                    "source": rec.get("source", "app_knowledge"),
+                },
+            ))
+    print(f"  Embedding {len(docs)} documents (this takes ~30–60 s on first load) ...")
     embeddings = build_embeddings()
-    vectorstore = FAISS.load_local(
-        INDEX_DIR, embeddings, allow_dangerous_deserialization=True
-    )
+    vectorstore = FAISS.from_documents(docs, embeddings)
+    # Try to persist for future restarts (won't work on ephemeral cloud FS — that's fine)
+    try:
+        os.makedirs(INDEX_DIR, exist_ok=True)
+        vectorstore.save_local(INDEX_DIR)
+        print(f"  Index saved to {INDEX_DIR}/")
+    except Exception:
+        pass
+    return vectorstore
+
+
+# Module-level singleton so the index is built only once per process
+_vectorstore = None
+
+
+def _load_vectorstore() -> FAISS:
+    global _vectorstore
+    if _vectorstore is not None:
+        return _vectorstore
+    embeddings = build_embeddings()
+    if os.path.exists(INDEX_DIR):
+        _vectorstore = FAISS.load_local(
+            INDEX_DIR, embeddings, allow_dangerous_deserialization=True
+        )
+    else:
+        _vectorstore = _build_index_from_knowledge()
+    return _vectorstore
+
+
+def build_components():
+    vectorstore = _load_vectorstore()
     retriever = vectorstore.as_retriever(search_kwargs={"k": TOP_K})
     llm = ChatOpenAI(model=CHAT_MODEL, temperature=0.2)
     return retriever, llm

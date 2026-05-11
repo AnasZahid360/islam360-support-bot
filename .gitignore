@@ -9,6 +9,9 @@ rag_documents.jsonl
 # Test artifacts
 test_tickets.json
 
+# FAISS index — too large for GitHub, rebuilt automatically on startup
+faiss_index/
+
 # Python
 __pycache__/
 *.pyc
